@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-md-12">
+    <form class="well container">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Enter Github Username" [(ngModel)]="username" name="username" (keyup)="searchUser()">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container">
+  <div *ngIf="user">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <!--User Name Display in Heading -->
+        <h3 class="panel-title">{{user.login}}</h3>
+      </div>
+
+      <div class="panel-body">
+        <div class="row">
+          <!--First Column Start -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <!--User Github Profile Picture -->
+            <img class="img-responsive" src="{{user.avatar_url}}" alt="Github Profile Avatar">
+            <a class="btn btn-default btn-lg btn-primary" target="_blank" href="{{user.html_url}}">View Profile</a>
+          </div>
+          <!--End Profile Picture and End First Column -->
+          <!--Begin Second Column -->
+          <div class="col-md-8 col-sm-8 col-xs-12">
+            <!--Labels Showing Github Stats -->
+            <div class="stats">
+              <span class="label label-primary">{{user.public_repos}} Public Repos</span>
+              <span class="label label-success">{{user.public_gists}} Gists</span>
+              <span class="label label-info">{{user.followers}} Followers</span>
+              <span class="label label-warning">{{user.following}} Following</span>
+            </div>
+            <!--End Stats -->
+            <br>
+            <ul class="list-group">
+              <!--List of User Info -->
+              <li class="list-group-item"><strong>Username:</strong> {{user.login}}</li>
+              <li class="list-group-item"><strong>Location:</strong> {{user.location}}</li>
+              <li class="list-group-item"><strong>Email:</strong> {{user.email}}</li>
+              <li class="list-group-item"><strong>Blog:</strong> {{user.blog}}</li>
+              <li class="list-group-item"><strong>Member Since:</strong> {{user.created_at}}</li>
+            </ul>
+            <!--End List -->
+          </div>
+          <!--End Second Column -->
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">User Repos</h3>
+      </div>
+      <div class="panel-body">
+        <div *ngFor="let repo of repos">
+          <div class="row">
+            <div class="col-md-9">
+              <h4><a target="_blank" href="{{repo.html_url}}"> {{repo.name}}</a></h4>
+              <p>{{repo.description}}</p>
+            </div>
+            <div class="col-md-3">
+              <span class="label label-danger">{{repo.watchers}} Watchers</span>
+              <span class="label label-default">{{repo.forks}} Forks</span>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
